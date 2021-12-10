@@ -44,6 +44,7 @@ if RUN_FLAG:
     in_list = []  # start list
     out_list1 = []  # copy of start list
     out_list2 = []  # doubled start list
+    out_list3 = list()  # copy of start list (without using copy())
 
     for _ in range(LIST_SIZE):  # creating new list with length LIST_SIZE and random ints from range
         in_list.append(random.randint(0, RANDOM_UPPER_BOUND))
@@ -54,7 +55,6 @@ if RUN_FLAG:
     for x in in_list:
         out_list2.append(x)
 
-    out_list3 = list()
     for x in in_list:
         out_list3.append(x)
 
