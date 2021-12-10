@@ -49,13 +49,19 @@ if RUN_FLAG:
         in_list.append(random.randint(0, RANDOM_UPPER_BOUND))
 
     out_list1 = in_list.copy()
+
     out_list2 = in_list.copy()
     for x in in_list:
         out_list2.append(x)
 
+    out_list3 = list()
+    for x in in_list:
+        out_list3.append(x)
+
     print(f"Start list: {in_list}")
     print(f"Copy of start list: {out_list1}")
     print(f"Doubled start list: {out_list2}")
+    print(f"Copy of start list (without using copy()): {out_list3}")
 
 
 if RUN_FLAG:
