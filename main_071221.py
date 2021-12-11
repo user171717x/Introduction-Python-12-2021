@@ -160,5 +160,3 @@ if RUN_FLAG:  # change it to True to run
         dic[key] = key * key
 
     print(f"Dictionary, where values equal squares of keys(1..15):\n {dic}")
-
-
