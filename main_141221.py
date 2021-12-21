@@ -15,7 +15,7 @@ if RUN_FLAG:  # change it to True to run
     x_int = random.randint(0, RANDOM_UPPER_BOUND)
     result = len(str(x_int)) - len(str(x_int).replace('0', ''))
     print(f"In integer {x_int} there are {result} zero digits.")
-
+    # result = number.count("0")    better case to solve that
 
 if RUN_FLAG:  # change it to True to run
     print('''
@@ -26,7 +26,7 @@ if RUN_FLAG:  # change it to True to run
     x_int = 10030030000
     result = len(str(x_int)) - len(str(int(str(x_int)[::-1])))
     print(f"In integer {x_int} there are {result} zero digits at the right side.")
-
+    # result = len(number) - len(number.rstrip("0"))        better case
 
 if RUN_FLAG:  # change it to True to run
     print('''
@@ -50,6 +50,17 @@ if RUN_FLAG:  # change it to True to run
             flag = True
     print(f"Start list: {my_list}\nEdited list: {res_list}")
 
+    # better
+    # for c in range(len(my_list)):
+    #   if c % 2 !=0:
+    #       result_list.append(my_list[::-1])
+    #   else:
+    #       result_list.append(my_list[c])
+    #
+    # much Better
+    # for idx in range(len(my_list)):
+    #     new_value = my_list[idx][::-1] if idx % 2 else my_list[idx]
+    #     my_list.append(my_list[idx])
 
 if RUN_FLAG:  # change it to True to run
     print('''
@@ -91,6 +102,8 @@ if RUN_FLAG:  # change it to True to run
     my_list.append(temp)
     print(f"Edited list: {my_list}")
 
+    # better
+    # my_list.append(my_list.pop(0))
 
 if RUN_FLAG:  # change it to True to run
     print('''
@@ -102,7 +115,7 @@ if RUN_FLAG:  # change it to True to run
 
     my_str = '43 больше чем 34 но меньше чем 56'
     result = 0
-    for item in my_str.split(' '):
+    for item in my_str.split(' '):      # split() - lychshe razdelyaet po probelam berya vse probeli idyshie ryadom
         if item.isdigit():
             result += int(item)
     print(f"Text with numbers: {my_str}\nTotal sum of all numbers at text: {result}")
@@ -124,6 +137,10 @@ if RUN_FLAG:  # change it to True to run
     sub_str = temp_str[:temp_str.index(r_limit):-1]
     print(f"Start string: {my_str}\nBiggest substring from {l_limit} to {r_limit}: {sub_str}")
 
+    #better
+    # l = my_str.find(l_limit)
+    # r = my_str.rindex(r_limit)
+    # s = my_str[l+1 : r]
 
 if RUN_FLAG:  # change it to True to run
     print('''
@@ -142,13 +159,13 @@ if RUN_FLAG:  # change it to True to run
 
     res_list = list()
 
-    if len(my_str) % 2 > 0:
+    if len(my_str) % 2 > 0:     # if len(my_str) % 2:    better case
         temp = my_str + '_'
     else:
         temp = my_str
 
-    for symbol in range(0, len(temp), 2):
-        res_list.append(temp[symbol:symbol + 2])
+    for idx in range(0, len(temp), 2):
+        res_list.append(temp[idx:idx + 2])
 
     print(f"Start string: {my_str}\nString split to list : {res_list}")
 
@@ -222,3 +239,19 @@ if RUN_FLAG:  # change it to True to run
     print(f"\nMinimal age at list: {min_age} age\nList of names with that age: {min_age_names}")
     print(f"\nMaximum name length at list: {max_name_len} symbols\nList of names with that length: {max_len_names}")
     print(f"\nAverage age at list: {aver_age}")
+
+    # better
+    # ages = []   all ages
+    # names_lens = []     all names length
+    # for person_dict in persons:
+    #     ages.append(person_dict["age"])
+    #     names_lens.append(len(person_dict["name"]))
+    # min_age = min(ages)
+    # max_name_len = max(names_lens)
+    # aver_age = sum(ages) / len(ages)
+    # for person_dict in persons:
+    #     if len(person_dict["name"]) == max_len_name:
+    #         print(person_dict["name"])
+    # for person_dict in persons:
+    #     if person_dict["age"] == min_age
+    #         print(person_dict["name"])
