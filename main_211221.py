@@ -44,13 +44,7 @@ def create_email(list_domains, list_lastnames):
     # creating string from letters using loop with our length
     domain_address = ''.join(random.choice(letters) for _ in range(string_length))
 
-    result = (list_lastnames[random.randint(0, len(list_lastnames) - 1)] +
-              '.' +
-              str(random.randint(100, 999)) +
-              '@' +
-              domain_address +
-              '.' +
-              list_domains[random.randint(0, len(list_domains) - 1)])
+    result = f"{random.choice(list_lastnames)}.{random.randint(100, 999)}@{domain_address}.{random.choice(list_domains)}"
     return result
 
 
