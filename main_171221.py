@@ -14,34 +14,35 @@ def print_random_int100():
 
 def print_rnd100_50bad_50good():
     if random.randint(1, 100) > 50:
-        print("Good")
+        print("Хорошо")
     else:
-        print("Bad")
+        print("Плохо")
 
 
 def print_uppercase(text):
-    result = str(text).upper()
+    result = text.upper()     # result = str(text).upper()  # no need convert, cos accepting text only
     print(result)
 
 
 def convert_uppercase(text):
-    return str(text).upper()
+    return text.upper()    # return str(text).upper()   # no need convert, cos accepting text only
 
 
 def convert_uppercase_strlist(str_list):
-    result = list()
-    for conv_str in str_list:
-        result.append(conv_str.upper())
-    return result
+    return [conv_str.upper() for conv_str in str_list]  # better solve
+    # result = list()
+    # for conv_str in str_list:
+    #     result.append(conv_str.upper())
+    # return result
 
 
 def get_int_range_list(upper_bound):
-    range_list = [number for number in range(1, int(upper_bound) + 1)]
+    range_list = [number for number in range(1, upper_bound + 1)]  # int(upper_bound) - no need cos except int only
     return range_list
 
 
 def get_square_range_list(upper_bound):
-    range_list = [number ** 2 for number in range(1, int(upper_bound) + 1)]
+    range_list = [number ** 2 for number in range(1, upper_bound + 1)] # int(upper_bound) - no need cos except int only
     return range_list
 
 
