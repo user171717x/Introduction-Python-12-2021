@@ -34,16 +34,7 @@ def scrap_date_lines(file_name: str) -> list:
 
 
 def scrap_dates(file_name: str) -> list:
-    date_lines = scrap_date_lines(file_name)
-
-    result = list()
-    for date in date_lines:
-        date_dict = dict()
-        date_dict['date_original'] = date
-        date_dict['date_modified'] = convert_date(date)
-        result.append(date_dict)
-
-    return result
+    return [{'date_original': date, 'date_modified': convert_date(date)} for date in scrap_date_lines(file_name)]
 
 
 """
