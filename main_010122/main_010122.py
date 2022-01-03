@@ -9,19 +9,35 @@ import os
 import string
 import random
 
-dir_name = 'alphabet'
-os.makedirs(dir_name, exist_ok=True)
 
-letters = string.ascii_lowercase
+DIR_NAME = 'alphabet'
+LETTERS = string.ascii_lowercase
 
-for symbol in letters:
-    write_str = letters.replace(symbol, symbol.upper())
-    file_name = f"{symbol}.txt"
-    file_path = os.path.join(dir_name, file_name)
-    with open(file_path, 'w') as txt_file:
-        txt_file.write(write_str)
 
-while len(os.listdir(dir_name)) > 13:
-    remove_file_name = f"{os.listdir(dir_name)[random.randint(0, len(os.listdir(dir_name)) - 1)]}"
-    remove_file_path = os.path.join(dir_name, remove_file_name)
-    os.remove(remove_file_path)
+def create_dir(dir_name: str) -> None:
+    os.makedirs(dir_name, exist_ok=True)
+
+
+def create_abc_files(dir_name: str, alphabet: str) -> None:
+    for symbol in alphabet:
+        file_name = f"{symbol}.txt"
+        file_path = os.path.join(dir_name, file_name)
+        with open(file_path, 'w') as txt_file:
+            txt_file.write(alphabet.replace(symbol, symbol.upper()))
+
+
+def thanos_snap(dir_name: str) -> None:
+    snap_point = len(os.listdir(dir_name))
+    while len(os.listdir(dir_name)) > snap_point // 2:
+        remove_file_name = f"{os.listdir(dir_name)[random.randint(0, len(os.listdir(dir_name)) - 1)]}"
+        remove_file_path = os.path.join(dir_name, remove_file_name)
+        os.remove(remove_file_path)
+
+
+create_dir(DIR_NAME)
+create_abc_files(DIR_NAME, LETTERS)
+thanos_snap(DIR_NAME)
+
+
+
+
