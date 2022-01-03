@@ -20,10 +20,6 @@ def convert_date(date_str: str) -> str:
     day_year = date_fields[2]
     day_month = str(months.index(date_fields[1])).zfill(2)  # adding needed 0 at start
     day_day = date_fields[0][:-2].zfill(2)
-    # raw_month = months.index(date_fields[1])
-    # raw_day = date_fields[0][:-2]
-    # day_month = raw_month if int(raw_month) > 9 else '0' + str(raw_month)
-    # day_day = raw_day if int(raw_day) > 9 else '0' + str(raw_day)
     return f"{day_day}/{day_month}/{day_year}"
 
 
@@ -34,8 +30,6 @@ def scrap_date_lines(file_name: str) -> list:
     for line in text:
         if ' - ' in line:
             date_lines.append(line.split(' - ')[0])
-        # if line.count('-'):
-        #     date_lines.append(line[:line.index('-') - 1])
     return date_lines
 
 
