@@ -5,11 +5,13 @@ import string
 
 def list_scrap_start_a(work_list):
     res_list = [item for item in work_list if item.find('a') == 0]
+    # res_list = [word for word in work_list if word.startswith('a')]    BEST WAY
     return res_list
 
 
 def list_scrap_any_a(work_list):
     res_list = [item for item in work_list if item.find('a') > -1]
+    # res_list = [word for word in work_list if 'a' in word]    BEST WAY
     return res_list
 
 
@@ -20,6 +22,7 @@ def list_scrap_all_strings(work_list):
 
 def get_single_symbols(work_str):
     res_list = [symbol for symbol in work_str if work_str.count(symbol) == 1]
+    # res_list = [symbol for symbol in set(work_str) if work_str.count(symbol) == 1]    BEST WAY, FASTER
     return res_list
 
 
@@ -32,6 +35,11 @@ def get_crossed_single_symbols(string_1, string_2):
     temp_list_1 = get_single_symbols(string_1)
     temp_list_2 = get_single_symbols(string_2)
     res_list = list(set(temp_list_1).intersection(set(temp_list_2)))
+    # # BEST WAY
+    # res_list = []
+    # for symbol in get_crossed_symbols(string_1, string_2):
+    #     if string_1.count(symbol) == string_2.count(symbol) == 1:
+    #         res_list.append(symbol)
     return res_list
 
 
