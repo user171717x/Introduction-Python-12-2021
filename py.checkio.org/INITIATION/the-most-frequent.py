@@ -13,8 +13,6 @@ def most_frequent(data: list) -> str:
         elif max_value < value:
             max_value = value
             max_key = key
-        else:
-            pass
 
     return max_key
 
