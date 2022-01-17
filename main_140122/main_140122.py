@@ -70,6 +70,10 @@ def get_quotes(amount: int) -> list:
     return result
 
 
+def sort_quotes_by_abc(item):
+    return item['Author']
+
+
 def write_quotes_csv(quotes_list: list, file_name: str = 'quotes.csv') -> int:
     """
     Get list of quotes from get_quotes() and save it to csv file with headers: Author, Quote, URL
@@ -79,7 +83,7 @@ def write_quotes_csv(quotes_list: list, file_name: str = 'quotes.csv') -> int:
     :return: int codes: 0 - file with quotes created success, 1 - any error, file not created
     """
 
-    quotes_list.sort(key=str)
+    quotes_list.sort(key=sort_quotes_by_abc)    # quotes_list.sort(key=str)    works also
 
     try:
         with open(file_name, 'w', encoding='utf-8') as csv_file:
