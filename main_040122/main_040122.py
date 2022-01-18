@@ -3,6 +3,7 @@ import json
 import random
 import string
 
+# ALL CONSTANTS NEED TO BE AT START OF FILE OR CONFIG FILE, NO MAGIC NUMBERS AT CODE!!!!!
 
 """
 Функция 1. Создает данные для записи в файл txt.
