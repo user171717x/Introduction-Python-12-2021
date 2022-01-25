@@ -1,5 +1,4 @@
 import csv
-import inspect
 import json
 import random
 from argparse import ArgumentParser
@@ -61,22 +60,19 @@ def open_event() -> dict:
     return game_data if game_data['event'] == 'RESTART' else decrypt(game_data)
 
 
-def save_event(game_data: dict) -> None:
+def save_event(game_data: dict, open_status: str = 'a') -> None:
     """
     Refresh state file in case Restart event or adding current game state to history file
+    :param open_status: 'a' - adding line to history, 'w' - rewrite history after restart game
     :param game_data: dictionary with game state
     :return: None
     """
-    caller = inspect.stack()[1][3]
-    if caller == 'event_restart':
-        open_status = 'w'
-    else:
-        open_status = 'a'
+    if open_status == 'a':
         game_data = encrypt(game_data)
     with open(HISTORY_FILE, open_status, encoding='utf-8') as csv_file:
         fieldnames = game_data.keys()
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        if caller == 'event_restart':
+        if open_status == 'w':
             writer.writeheader()
         writer.writerow(game_data)
 
@@ -90,8 +86,9 @@ def event_restart() -> None:
         game_data = json.load(json_file)
     game_data['event'] = 'RESTART'
     del game_data['delta']
+    del game_data['encrypt']
 
-    save_event(game_data)
+    save_event(game_data, 'w')
 
 
 def event_rate() -> None:
@@ -242,19 +239,31 @@ def event_sell_all() -> None:
 def encrypt(game_data: dict) -> dict:
     """
     Basic encrypt of game state dictionary to prevent simple falsification
+    "encrypt": 1 at config - encrypt game data, "encrypt": 0 - game data without encrypt
     :param game_data: dictionary with game state
     :return: encrypted dictionary with game state
     """
-    return {key: "".join([f" {ord(symbol) ** 2}" for symbol in game_data[key]]) for key in game_data.keys()}
+    with open(START_CONFIG, 'r') as json_file:
+        game_config = json.load(json_file)
+    if game_config['encrypt']:
+        return {key: "".join([f" {ord(symbol) ** 2}" for symbol in game_data[key]]) for key in game_data.keys()}
+    else:
+        return game_data
 
 
 def decrypt(game_data: dict) -> dict:
     """
     Decrypt encrypted game state dictionary
+    "encrypt": 1 at config - game data encrypted, "encrypt": 0 - game data without encrypt
     :param game_data: encrypted dictionary with game state
     :return: dictionary with game state
     """
-    return {key: "".join([chr(int(int(symbol) ** 0.5)) for symbol in game_data[key].split()]) for key in game_data.keys()}
+    with open(START_CONFIG, 'r') as json_file:
+        game_config = json.load(json_file)
+    if game_config['encrypt']:
+        return {key: "".join([chr(int(int(symbol) ** 0.5)) for symbol in game_data[key].split()]) for key in game_data.keys()}
+    else:
+        return game_data
 
 
 event_listener()

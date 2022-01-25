@@ -43,3 +43,8 @@ config.json
 >>>python trader.py BUY 100
 >>>python trader.py AVAILABLE
 USD 100.0 UAH 7407.0
+
+
+Advanced properties:
+Basic encrypt of game state data to prevent simple falsification
+"encrypt": 1 at config - game data encrypted, "encrypt": 0 - game data without encrypt
