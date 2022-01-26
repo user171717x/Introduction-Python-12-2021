@@ -149,7 +149,7 @@ def event_buy(amount: float) -> None:
     amount_uah = float(game_data['uah_total'])
     amount_usd = float(game_data['usd_total'])
     exchange_rate = float(game_data['exchange_rate'])
-    expect_usd = float(amount)
+    expect_usd = amount
     require_uah = round(amount * exchange_rate, 2)
 
     if amount_uah >= require_uah:
@@ -200,7 +200,7 @@ def event_sell(amount: float) -> None:
     amount_uah = float(game_data['uah_total'])
     amount_usd = float(game_data['usd_total'])
     exchange_rate = float(game_data['exchange_rate'])
-    require_usd = float(amount)
+    require_usd = amount
     receive_uah = round(amount * exchange_rate, 2)
 
     if amount_usd >= require_usd:
