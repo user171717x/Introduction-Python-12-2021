@@ -150,8 +150,26 @@ class GenAndWriteFile(WriteTxt, WriteCsv, WriteJson):
         else:
             print('Unsupported file format')
 
+# Better >>>
+# class GenAndWriteFile:
+#     def init(self, file_path: str):
+#         self.__file_path = file_path
+#         self.__file_ext = self.__file_path.split('.')[-1]
+#         if self.__file_ext == 'txt':
+#             self.writer = WriteTxt(file_path)
+#         elif self.__file_ext == 'json':
+#             self.writer = WriteJson(file_path)
+#         elif self.__file_ext == 'csv':
+#             self.writer = WriteCsv(file_path)
+#         else:
+#             print('Unsupported file format')
+#
+#     def write(self):
+#         self.writer._write(self)
+
 
 GenAndWriteFile(TXT_FILE_PATH).write()
 GenAndWriteFile(JSON_FILE_PATH).write()
 GenAndWriteFile(CSV_FILE_PATH).write()
 GenAndWriteFile(BAD_FILE_PATH).write()
+

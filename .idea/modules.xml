@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Introduction-Python-12-2021.iml" filepath="$PROJECT_DIR$/.idea/Introduction-Python-12-2021.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../codewars_python/.idea/codewars_python.iml" filepath="$PROJECT_DIR$/../codewars_python/.idea/codewars_python.iml" />
       <module fileurl="file://$PROJECT_DIR$/../pythonProject/.idea/pythonProject.iml" filepath="$PROJECT_DIR$/../pythonProject/.idea/pythonProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/../skillbox-python/.idea/skillbox-python.iml" filepath="$PROJECT_DIR$/../skillbox-python/.idea/skillbox-python.iml" />
     </modules>

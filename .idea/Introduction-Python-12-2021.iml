@@ -6,5 +6,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="pythonProject" />
     <orderEntry type="module" module-name="skillbox-python" />
+    <orderEntry type="module" module-name="codewars_python" />
   </component>
 </module>
