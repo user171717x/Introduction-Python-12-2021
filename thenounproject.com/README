@@ -1,0 +1,11 @@
+https://thenounproject.com/
+
+Allows to get images and icons threw API
+
+API key:
+KEY=7bbfd7ead8094e238a6c4925474e04cc
+SECRET=f7ed1ab38f244d8383fe4d89a1bfa6d2
+
+Requared packages:
+pip install requests requests_oauthlib
+pip install python-dotenv
