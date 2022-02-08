@@ -9,14 +9,14 @@ class Event:
         self._history_file = 'history.csv'  # table with game state changes
 
         with open(self._start_config, 'r') as json_file:
-            self.__game_config = json.load(json_file)
+            self._game_config = json.load(json_file)
         with open(self._history_file, 'r', encoding='utf-8') as csv_file:
             reader = csv.DictReader(csv_file, delimiter=',')
             self.__game_data = list(reader)[-1]
 
         self.__event = event
         self.__amount = amount
-        self._encryption = self.__game_config['encrypt']
+        self._encryption = self._game_config['encrypt']
 
         if event == 'RESTART':
             self.__restart()
@@ -27,7 +27,7 @@ class Event:
         self.__exchange_rate = float(self.__game_data['exchange_rate'])
         self.__uah_total = float(self.__game_data['uah_total'])
         self.__usd_total = float(self.__game_data['usd_total'])
-        self.__delta = float(self.__game_config['delta'])
+        self.__delta = float(self._game_config['delta'])
 
     def go(self):
         if self.__event == 'RATE':
@@ -78,9 +78,9 @@ class Event:
         Start new game with initial conditions , restart history table
         :return: None
         """
-        self.__exchange_rate = float(self.__game_config['exchange_rate'])
-        self.__uah_total = float(self.__game_config['uah_total'])
-        self.__usd_total = float(self.__game_config['usd_total'])
+        self.__exchange_rate = float(self._game_config['exchange_rate'])
+        self.__uah_total = float(self._game_config['uah_total'])
+        self.__usd_total = float(self._game_config['usd_total'])
 
     def __rate(self) -> None:
         """
