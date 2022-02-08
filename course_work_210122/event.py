@@ -181,3 +181,6 @@ class Event:
             self.__game_data = {key: "".join([chr(int(int(symbol) ** 0.5)) for symbol in self.__game_data[key].split()])
                                 for key in
                                 self.__game_data.keys()}
+
+
+print("hello")
