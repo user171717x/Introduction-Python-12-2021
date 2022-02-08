@@ -16,7 +16,7 @@ class Event:
 
         self.__event = event
         self.__amount = amount
-        self.__encryption = self.__game_config['encrypt']
+        self._encryption = self.__game_config['encrypt']
 
         if event == 'RESTART':
             self.__restart()
