@@ -5,12 +5,12 @@ import random
 
 class Event:
     def __init__(self, event, amount):
-        self.__start_config = 'config.json'  # config file with initial conditions and exchange rate change delta
-        self.__history_file = 'history.csv'  # table with game state changes
+        self._start_config = 'config.json'  # config file with initial conditions and exchange rate change delta
+        self._history_file = 'history.csv'  # table with game state changes
 
-        with open(self.__start_config, 'r') as json_file:
+        with open(self._start_config, 'r') as json_file:
             self.__game_config = json.load(json_file)
-        with open(self.__history_file, 'r', encoding='utf-8') as csv_file:
+        with open(self._history_file, 'r', encoding='utf-8') as csv_file:
             reader = csv.DictReader(csv_file, delimiter=',')
             self.__game_data = list(reader)[-1]
 
@@ -66,7 +66,7 @@ class Event:
         self.__game_data['event'] = self.__event
         if open_status == 'a':
             self.__encrypt()
-        with open(self.__history_file, open_status, encoding='utf-8') as csv_file:
+        with open(self._history_file, open_status, encoding='utf-8') as csv_file:
             fieldnames = self.__game_data.keys()
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             if open_status == 'w':
