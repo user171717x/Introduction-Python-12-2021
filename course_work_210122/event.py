@@ -14,8 +14,8 @@ class Event:
             reader = csv.DictReader(csv_file, delimiter=',')
             self.__game_data = list(reader)[-1]
 
-        self.__event = event
-        self.__amount = amount
+        self._event = event
+        self._amount = amount
         self.__encryption = self.__game_config['encrypt']
 
         if event == 'RESTART':
@@ -30,26 +30,26 @@ class Event:
         self.__delta = float(self.__game_config['delta'])
 
     def go(self):
-        if self.__event == 'RATE':
+        if self._event == 'RATE':
             self.__rate()
-        elif self.__event == 'AVAILABLE':
+        elif self._event == 'AVAILABLE':
             self.__available()
-        elif self.__event == 'RESTART':
+        elif self._event == 'RESTART':
             self.__restart()
-        elif self.__event == 'NEXT':
+        elif self._event == 'NEXT':
             self.__next()
-        elif self.__event == 'BUY':
-            if self.__amount == 'ALL':
+        elif self._event == 'BUY':
+            if self._amount == 'ALL':
                 self.__buy_all()
             else:
-                self.__buy(float(self.__amount))
-        elif self.__event == 'SELL':
-            if self.__amount == 'ALL':
+                self.__buy(float(self._amount))
+        elif self._event == 'SELL':
+            if self._amount == 'ALL':
                 self.__sell_all()
             else:
-                self.__sell(float(self.__amount))
+                self.__sell(float(self._amount))
 
-        if self.__event == 'RESTART':
+        if self._event == 'RESTART':
             self.__save('w')
         else:
             self.__save()
@@ -63,7 +63,7 @@ class Event:
         self.__game_data['exchange_rate'] = str(self.__exchange_rate)
         self.__game_data['uah_total'] = str(self.__uah_total)
         self.__game_data['usd_total'] = str(self.__usd_total)
-        self.__game_data['event'] = self.__event
+        self.__game_data['event'] = self._event
         if open_status == 'a':
             self.__encrypt()
         with open(self._history_file, open_status, encoding='utf-8') as csv_file:
@@ -120,10 +120,10 @@ class Event:
         if self.__uah_total >= require_uah:
             self.__usd_total += amount
             self.__uah_total -= require_uah
-            self.__event = f"BUY {amount} DONE"
+            self._event = f"BUY {amount} DONE"
         else:
             print(f"UNAVAILABLE, REQUIRED BALANCE UAH {require_uah}, AVAILABLE {self.__uah_total}")
-            self.__event = f"BUY {amount} CANCELLED"
+            self._event = f"BUY {amount} CANCELLED"
 
     def __buy_all(self) -> None:
         """
@@ -134,7 +134,7 @@ class Event:
         pay_uah = (expect_usd - 0.01) * self.__exchange_rate
         self.__uah_total = round(self.__uah_total - pay_uah, 2)
         self.__usd_total = round(self.__usd_total + pay_uah / self.__exchange_rate, 2)
-        self.__event = 'BUY ALL'
+        self._event = 'BUY ALL'
 
     def __sell(self, amount: float) -> None:
         """
@@ -147,10 +147,10 @@ class Event:
         if self.__usd_total >= amount:
             self.__usd_total -= amount
             self.__uah_total = round(self.__uah_total + amount * self.__exchange_rate, 2)
-            self.__event = f"SELL {amount} DONE"
+            self._event = f"SELL {amount} DONE"
         else:
             print(f"UNAVAILABLE, REQUIRED BALANCE USD {amount}, AVAILABLE {self.__usd_total}")
-            self.__event = f"SELL {amount} CANCELLED"
+            self._event = f"SELL {amount} CANCELLED"
 
     def __sell_all(self) -> None:
         """
@@ -159,7 +159,7 @@ class Event:
         """
         self.__uah_total = round(self.__uah_total + self.__usd_total * self.__exchange_rate, 2)
         self.__usd_total = 0.0
-        self.__event = 'SELL ALL'
+        self._event = 'SELL ALL'
 
     def __encrypt(self) -> None:
         """
